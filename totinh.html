@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi người tớ thích</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        h1 { color: #ff4d6d; margin-bottom: 30px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn:hover { transform: scale(1.1); background-color: #ff758f; }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute; /* Quan trọng để nút di chuyển */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="question">Cậu làm người yêu tớ nhé? ❤️</h1>
+        <div class="btn-group">
+            <button id="yesBtn">Đồng ý!</button>
+            <button id="noBtn">Không :P</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const question = document.getElementById('question');
+
+        // Hàm di chuyển nút Từ chối
+        function moveButton() {
+            // Tính toán vị trí ngẫu nhiên trong màn hình
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        // Khi di chuột qua hoặc chạm vào (trên điện thoại)
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Chặn hành động click khi chạm
+            moveButton();
+        });
+
+        // Khi bấm Đồng ý
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "Tớ biết mà! Yêu cậu nhiềuuuu ❤️❤️❤️";
+            noBtn.style.display = 'none'; // Ẩn nút từ chối
+            yesBtn.style.transform = 'scale(1.5)';
+        });
+    </script>
+</body>
+</html>
